@@ -1,13 +1,13 @@
 {
-  "name": "kitt",
-  "version": "0.0.1",
-  "description": "",
+  "name": "@sarasate/kitt",
+  "version": "0.0.4",
+  "description": "Keep your shell commands",
   "author": "sarasate",
-  "private": true,
   "license": "MIT",
   "bin": {
-    "kitt": "dist/main"
+    "kitt": "./dist/main.js"
   },
+  "preferGlobal": true,
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
@@ -21,7 +21,7 @@
   "dependencies": {
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
-    "@types/inquirer": "^9.0.3",
+    "@types/inquirer": "^8.2.5",
     "nest-commander": "^3.4.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0"
@@ -43,7 +43,8 @@
     "ts-jest": "29.0.3",
     "ts-loader": "^9.2.3",
     "tsconfig-paths": "4.1.1",
-    "typescript": "^4.7.4"
+    "typescript": "^4.7.4",
+    "webpack": "^5.75.0"
   },
   "jest": {
     "moduleFileExtensions": [
