@@ -1,4 +1,5 @@
 import { Command, CommandRunner } from 'nest-commander';
+import { formatCommands } from '../utils/commands.format';
 import { parseFile } from '../utils/file.parse';
 
 @Command({
@@ -11,8 +12,8 @@ export class ListCommand extends CommandRunner {
     const json = parseFile();
 
     // Show all commands
-    Object.entries(json).forEach((command: any) => {
-      console.log(command);
-    });
+    formatCommands(json);
+    // Object.entries(json).forEach((command: any) => {
+    // });
   }
 }
