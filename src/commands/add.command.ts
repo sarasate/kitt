@@ -38,7 +38,7 @@ export class CommandQuestions {
   }
 }
 
-@Command({ name: 'add' })
+@Command({ name: 'add', description: 'Add a new command' })
 export class AddCommand extends CommandRunner {
   constructor(private readonly inquirer: InquirerService) {
     super();
