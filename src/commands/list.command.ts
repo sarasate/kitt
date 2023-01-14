@@ -4,6 +4,7 @@ import { parseFile } from '../utils/file.parse';
 
 @Command({
   name: 'list',
+  aliases: ['ls'],
   description: 'List all commands',
   // arguments: '<task>',
   // options: { isDefault: true },
