@@ -7,6 +7,7 @@ import {
 } from './commands/github_token.command';
 import { InitCommand } from './commands/init.command';
 import { ListCommand } from './commands/list.command';
+import { PushCommand } from './commands/push.command';
 import { VersionCommand } from './commands/version.command';
 
 @Module({
@@ -17,6 +18,7 @@ import { VersionCommand } from './commands/version.command';
     GithubTokenCommand,
     InitCommand,
     ListCommand,
+    PushCommand,
     VersionCommand,
     CommandQuestions,
     TokenQuestions,
