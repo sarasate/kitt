@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
+const pjson = require('../package.json');
 
 @Injectable()
 export class AppService {
-  getHello(): string {
-    return 'Hello World!';
+  getVersion(): string {
+    return pjson.version;
   }
 }
