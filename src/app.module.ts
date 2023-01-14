@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AppService } from './app.service';
 import { AddCommand, CommandQuestions } from './commands/add.command';
+import { EditCommand, EditQuestions } from './commands/edit.command';
 import {
   GithubTokenCommand,
   TokenQuestions,
@@ -9,6 +10,7 @@ import { InitCommand } from './commands/init.command';
 import { ListCommand } from './commands/list.command';
 import { PullCommand } from './commands/pull.command';
 import { PushCommand } from './commands/push.command';
+import { RemoveCommand } from './commands/remove.command';
 import { VersionCommand } from './commands/version.command';
 
 @Module({
@@ -16,13 +18,16 @@ import { VersionCommand } from './commands/version.command';
   providers: [
     AppService,
     AddCommand,
+    // EditCommand,
     GithubTokenCommand,
     InitCommand,
     ListCommand,
     PullCommand,
     PushCommand,
+    RemoveCommand,
     VersionCommand,
     CommandQuestions,
+    EditQuestions,
     TokenQuestions,
   ],
 })
