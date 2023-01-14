@@ -7,6 +7,7 @@ import {
 } from './commands/github_token.command';
 import { InitCommand } from './commands/init.command';
 import { ListCommand } from './commands/list.command';
+import { PullCommand } from './commands/pull.command';
 import { PushCommand } from './commands/push.command';
 import { VersionCommand } from './commands/version.command';
 
@@ -18,6 +19,7 @@ import { VersionCommand } from './commands/version.command';
     GithubTokenCommand,
     InitCommand,
     ListCommand,
+    PullCommand,
     PushCommand,
     VersionCommand,
     CommandQuestions,
