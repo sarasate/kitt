@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { AppService } from './app.service';
 import { AddCommand, CommandQuestions } from './commands/add.command';
-import { EditCommand, EditQuestions } from './commands/edit.command';
 import {
   GithubTokenCommand,
   TokenQuestions,
@@ -27,7 +26,7 @@ import { VersionCommand } from './commands/version.command';
     RemoveCommand,
     VersionCommand,
     CommandQuestions,
-    EditQuestions,
+    // EditQuestions,
     TokenQuestions,
   ],
 })
