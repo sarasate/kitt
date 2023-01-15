@@ -1,5 +1,8 @@
 import { table, TableUserConfig } from 'table';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const chalk = require('chalk');
+
 interface CommandOutput {
   description?: string;
   alias?: string;
@@ -21,10 +24,14 @@ export const formatCommands = (commands: { [key: string]: CommandOutput }) => {
  */
 const convertData = (json: any) => {
   const arr = [];
-  arr.push(['Commands', '', '']);
-  arr.push(['Command', 'Description', 'Alias']);
+  arr.push([chalk.bold.blue('Commands'), '', '']);
+  arr.push([
+    chalk.bold('Command'),
+    chalk.bold('Description'),
+    chalk.bold('Alias'),
+  ]);
   Object.entries(json).forEach(([key, value]: any) => {
-    arr.push([key, value.description, value.alias]);
+    arr.push([chalk.green(key), value.description, value.alias]);
   });
   return arr;
 };
