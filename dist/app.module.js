@@ -10,7 +10,6 @@ exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const app_service_1 = require("./app.service");
 const add_command_1 = require("./commands/add.command");
-const edit_command_1 = require("./commands/edit.command");
 const github_token_command_1 = require("./commands/github_token.command");
 const init_command_1 = require("./commands/init.command");
 const list_command_1 = require("./commands/list.command");
@@ -34,7 +33,6 @@ AppModule = __decorate([
             remove_command_1.RemoveCommand,
             version_command_1.VersionCommand,
             add_command_1.CommandQuestions,
-            edit_command_1.EditQuestions,
             github_token_command_1.TokenQuestions,
         ],
     })
