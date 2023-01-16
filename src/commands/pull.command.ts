@@ -31,7 +31,6 @@ export class PullCommand extends CommandRunner {
         },
       })
       .then((res) => {
-        console.log(res);
         const result = res?.data?.files['commands.json'].content || {};
 
         writeFile(JSON.parse(result));

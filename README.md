@@ -2,16 +2,20 @@
 
 Keep it in the Terminal.
 
+"kitt" is a command-line tool that allows you to easily store, organize, and retrieve frequently used commands. With kitt, you can add and edit commands and quickly search through your command library. It also allows you to export and import your command library, making it easy to share commands between different machines or with other users.
+
 # Features
 
 - Save commands with description and alias
-- Search commands
+- List commands
+- Delete commands
+- Sync to github gist
 
 # Roadmap
 
+- Search commands
 - Run commands
 - Edit commands
-- Delete commands
 - Add variables to commands
 - CLI completion
 - Library of basic commands
