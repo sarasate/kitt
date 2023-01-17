@@ -9,7 +9,7 @@ import { InitCommand } from './commands/init.command';
 import { ListCommand } from './commands/list.command';
 import { PullCommand } from './commands/pull.command';
 import { PushCommand } from './commands/push.command';
-import { RemoveCommand } from './commands/remove.command';
+import { RemoveCommand, RemoveQuestions } from './commands/remove.command';
 import { VersionCommand } from './commands/version.command';
 
 @Module({
@@ -27,6 +27,7 @@ import { VersionCommand } from './commands/version.command';
     VersionCommand,
     CommandQuestions,
     // EditQuestions,
+    RemoveQuestions,
     TokenQuestions,
   ],
 })
