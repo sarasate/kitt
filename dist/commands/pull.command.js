@@ -26,7 +26,6 @@ let PullCommand = class PullCommand extends nest_commander_1.CommandRunner {
         })
             .then((res) => {
             var _a;
-            console.log(res);
             const result = ((_a = res === null || res === void 0 ? void 0 : res.data) === null || _a === void 0 ? void 0 : _a.files['commands.json'].content) || {};
             (0, files_persist_1.writeFile)(JSON.parse(result));
         })

@@ -33,6 +33,7 @@ AppModule = __decorate([
             remove_command_1.RemoveCommand,
             version_command_1.VersionCommand,
             add_command_1.CommandQuestions,
+            remove_command_1.RemoveQuestions,
             github_token_command_1.TokenQuestions,
         ],
     })

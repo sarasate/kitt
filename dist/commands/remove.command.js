@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RemoveCommand = void 0;
+exports.RemoveQuestions = exports.RemoveCommand = void 0;
 const nest_commander_1 = require("nest-commander");
 const files_persist_1 = require("../utils/files.persist");
 const file_parse_1 = require("../utils/file.parse");
@@ -19,8 +19,13 @@ let RemoveCommand = class RemoveCommand extends nest_commander_1.CommandRunner {
         this.inquirer = inquirer;
     }
     async run(inputs, options) {
+        let command = inputs[0];
+        if (!command) {
+            const values = await this.inquirer.ask('remove-questions', undefined);
+            command = values.command;
+        }
         const commands = (0, file_parse_1.parseFile)();
-        delete commands[inputs[0]];
+        delete commands[command];
         (0, files_persist_1.writeFile)(commands);
     }
 };
@@ -33,4 +38,22 @@ RemoveCommand = __decorate([
     __metadata("design:paramtypes", [nest_commander_1.InquirerService])
 ], RemoveCommand);
 exports.RemoveCommand = RemoveCommand;
+let RemoveQuestions = class RemoveQuestions {
+    parseCommand(value) {
+        return value;
+    }
+};
+__decorate([
+    (0, nest_commander_1.Question)({
+        message: 'What command would you like to edit?',
+        name: 'command',
+    }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], RemoveQuestions.prototype, "parseCommand", null);
+RemoveQuestions = __decorate([
+    (0, nest_commander_1.QuestionSet)({ name: 'remove-questions' })
+], RemoveQuestions);
+exports.RemoveQuestions = RemoveQuestions;
 //# sourceMappingURL=remove.command.js.map
