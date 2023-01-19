@@ -16,6 +16,7 @@ const list_command_1 = require("./commands/list.command");
 const pull_command_1 = require("./commands/pull.command");
 const push_command_1 = require("./commands/push.command");
 const remove_command_1 = require("./commands/remove.command");
+const search_command_1 = require("./commands/search.command");
 const version_command_1 = require("./commands/version.command");
 let AppModule = class AppModule {
 };
@@ -31,9 +32,11 @@ AppModule = __decorate([
             pull_command_1.PullCommand,
             push_command_1.PushCommand,
             remove_command_1.RemoveCommand,
+            search_command_1.SearchCommand,
             version_command_1.VersionCommand,
             add_command_1.CommandQuestions,
             remove_command_1.RemoveQuestions,
+            search_command_1.SearchQuestions,
             github_token_command_1.TokenQuestions,
         ],
     })
