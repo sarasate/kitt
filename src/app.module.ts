@@ -10,6 +10,7 @@ import { ListCommand } from './commands/list.command';
 import { PullCommand } from './commands/pull.command';
 import { PushCommand } from './commands/push.command';
 import { RemoveCommand, RemoveQuestions } from './commands/remove.command';
+import { SearchCommand, SearchQuestions } from './commands/search.command';
 import { VersionCommand } from './commands/version.command';
 
 @Module({
@@ -17,17 +18,17 @@ import { VersionCommand } from './commands/version.command';
   providers: [
     AppService,
     AddCommand,
-    // EditCommand,
     GithubTokenCommand,
     InitCommand,
     ListCommand,
     PullCommand,
     PushCommand,
     RemoveCommand,
+    SearchCommand,
     VersionCommand,
     CommandQuestions,
-    // EditQuestions,
     RemoveQuestions,
+    SearchQuestions,
     TokenQuestions,
   ],
 })

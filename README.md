@@ -13,7 +13,8 @@ Keep it in the Terminal.
 
 # Roadmap
 
-- Search commands
+- Search commands in command library
+- Find in your own stored commands
 - Run commands
 - Edit commands
 - Add variables to commands
