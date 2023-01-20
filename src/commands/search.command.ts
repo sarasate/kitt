@@ -48,7 +48,12 @@ export class SearchCommand extends CommandRunner {
         const json = JSON.parse(jsonString);
         // Search data
         const result = json.filter((object) =>
-          object.command.toLowerCase().match(new RegExp(query, 'i')),
+          Object.values(object).some((value) =>
+            value
+              .toString()
+              .toLowerCase()
+              .match(new RegExp(query.toLowerCase(), 'i')),
+          ),
         );
         // TODO Format result
         formatLibraryCommands(result);
