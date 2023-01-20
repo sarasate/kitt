@@ -54,7 +54,7 @@ const convertLibraryData = (json: any) => {
   arr.push([
     chalk.bold('Command'),
     chalk.bold('Description'),
-    chalk.bold('Alias'),
+    chalk.bold('Tags'),
   ]);
   json.forEach((entry: any) => {
     arr.push([chalk.green(entry.command), entry.desc, entry.tags]);

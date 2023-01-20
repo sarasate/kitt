@@ -55,7 +55,6 @@ export class SearchCommand extends CommandRunner {
               .match(new RegExp(query.toLowerCase(), 'i')),
           ),
         );
-        // TODO Format result
         formatLibraryCommands(result);
       })
       .catch((err) => {
