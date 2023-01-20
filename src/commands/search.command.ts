@@ -1,4 +1,3 @@
-import { exec } from 'child_process';
 import {
   Command,
   CommandRunner,
@@ -7,6 +6,7 @@ import {
   QuestionSet,
 } from 'nest-commander';
 import axios from 'axios';
+import { formatLibraryCommands } from '../utils/commands.format';
 
 const COMMAND_REPO_URL =
   // 'https://api.github.com/search/code?q=index.json+repo:sarasate/commands';
@@ -51,7 +51,7 @@ export class SearchCommand extends CommandRunner {
           object.command.toLowerCase().match(new RegExp(query, 'i')),
         );
         // TODO Format result
-        console.log(result);
+        formatLibraryCommands(result);
       })
       .catch((err) => {
         console.log(err);
