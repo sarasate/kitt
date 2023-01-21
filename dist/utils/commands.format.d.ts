@@ -5,4 +5,5 @@ interface CommandOutput {
 export declare const formatCommands: (commands: {
     [key: string]: CommandOutput;
 }) => void;
+export declare const formatLibraryCommands: (commands: any) => void;
 export {};
