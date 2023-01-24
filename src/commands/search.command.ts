@@ -13,7 +13,7 @@ const COMMAND_REPO_URL =
   'https://api.github.com/repos/sarasate/commands/contents/index.json';
 
 interface CommandInput {
-  command: string;
+  query: string;
 }
 
 @Command({
@@ -32,7 +32,7 @@ export class SearchCommand extends CommandRunner {
         'search-questions',
         undefined,
       );
-      query = values.command;
+      query = values.query;
     }
 
     // Search command library
