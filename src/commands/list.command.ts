@@ -14,8 +14,6 @@ export class ListCommand extends CommandRunner {
     const json = parseFile();
 
     // Show all commands
-    formatCommands(json);
-    // Object.entries(json).forEach((command: any) => {
-    // });
+    console.log(formatCommands(json));
   }
 }

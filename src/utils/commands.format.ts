@@ -13,12 +13,12 @@ interface CommandOutput {
  */
 export const formatCommands = (commands: { [key: string]: CommandOutput }) => {
   const tableData = convertData(commands);
-  console.log(table(tableData, tableConfig));
+  return table(tableData, tableConfig);
 };
 
 export const formatLibraryCommands = (commands) => {
   const tableData = convertLibraryData(commands);
-  console.log(table(tableData, tableConfig));
+  return table(tableData, tableConfig);
 };
 
 /**

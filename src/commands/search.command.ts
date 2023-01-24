@@ -5,8 +5,7 @@ import {
   Question,
   QuestionSet,
 } from 'nest-commander';
-import axios from 'axios';
-import { formatLibraryCommands } from '../utils/commands.format';
+import { searchCommands } from '../utils/commands.search';
 
 const COMMAND_REPO_URL =
   // 'https://api.github.com/search/code?q=index.json+repo:sarasate/commands';
@@ -35,31 +34,35 @@ export class SearchCommand extends CommandRunner {
       query = values.query;
     }
 
+    searchCommands(query).then((output) => {
+      console.log(output);
+    });
+
     // Search command library
-    axios
-      .get(COMMAND_REPO_URL)
-      .then((res) => {
-        if (!res) return;
-        // Convert base64 to utf-8
-        const jsonString = Buffer.from(res.data.content, 'base64').toString(
-          'utf-8',
-        );
-        // Parse JSON
-        const json = JSON.parse(jsonString);
-        // Search data
-        const result = json.filter((object) =>
-          Object.values(object).some((value) =>
-            value
-              .toString()
-              .toLowerCase()
-              .match(new RegExp(query.toLowerCase(), 'i')),
-          ),
-        );
-        formatLibraryCommands(result);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // axios
+    //   .get(COMMAND_REPO_URL)
+    //   .then((res) => {
+    //     if (!res) return;
+    //     // Convert base64 to utf-8
+    //     const jsonString = Buffer.from(res.data.content, 'base64').toString(
+    //       'utf-8',
+    //     );
+    //     // Parse JSON
+    //     const json = JSON.parse(jsonString);
+    //     // Search data
+    //     const result = json.filter((object) =>
+    //       Object.values(object).some((value) =>
+    //         value
+    //           .toString()
+    //           .toLowerCase()
+    //           .match(new RegExp(query.toLowerCase(), 'i')),
+    //       ),
+    //     );
+    //     formatLibraryCommands(result);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   }
 }
 
