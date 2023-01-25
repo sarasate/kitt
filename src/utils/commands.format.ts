@@ -16,7 +16,7 @@ export const formatCommands = (commands: { [key: string]: CommandOutput }) => {
   return table(tableData, tableConfig);
 };
 
-export const formatLibraryCommands = (commands) => {
+export const formatLibraryCommands = (commands, numbered = false) => {
   const tableData = convertLibraryData(commands);
   return table(tableData, tableConfig);
 };
@@ -50,14 +50,17 @@ const convertData = (json: any) => {
 const convertLibraryData = (json: any) => {
   console.log(typeof json);
   const arr = [];
-  arr.push([chalk.bold.blue('Commands'), '', '']);
+  arr.push([chalk.bold.blue('Commands'), '', '', '']);
+
   arr.push([
+    chalk.bold('No.'),
     chalk.bold('Command'),
     chalk.bold('Description'),
     chalk.bold('Tags'),
   ]);
-  json.forEach((entry: any) => {
-    arr.push([chalk.green(entry.command), entry.desc, entry.tags]);
+  json.forEach((entry: any, index) => {
+    console.log(index);
+    arr.push([index, chalk.green(entry.command), entry.desc, entry.tags]);
   });
   return arr;
 };

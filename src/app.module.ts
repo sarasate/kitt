@@ -10,6 +10,11 @@ import { ListCommand } from './commands/list.command';
 import { PullCommand } from './commands/pull.command';
 import { PushCommand } from './commands/push.command';
 import { RemoveCommand, RemoveQuestions } from './commands/remove.command';
+import {
+  ExecRunQuestions,
+  QueryRunQuestions,
+  RunCommand,
+} from './commands/run.command';
 import { SearchCommand, SearchQuestions } from './commands/search.command';
 import { VersionCommand } from './commands/version.command';
 
@@ -24,9 +29,12 @@ import { VersionCommand } from './commands/version.command';
     PullCommand,
     PushCommand,
     RemoveCommand,
+    RunCommand,
     SearchCommand,
     VersionCommand,
     CommandQuestions,
+    ExecRunQuestions,
+    QueryRunQuestions,
     RemoveQuestions,
     SearchQuestions,
     TokenQuestions,

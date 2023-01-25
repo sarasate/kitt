@@ -1,25 +1,86 @@
 import { exec } from 'child_process';
-import { Command, CommandRunner } from 'nest-commander';
+import {
+  Command,
+  CommandRunner,
+  InquirerService,
+  Question,
+  QuestionSet,
+} from 'nest-commander';
+import { formatLibraryCommands } from '../utils/commands.format';
+import { searchCommands } from '../utils/commands.search';
+import * as childProcess from 'child_process';
+
+const clipboard = childProcess.spawn('pbcopy');
 
 @Command({
   name: 'run',
-  arguments: '<command>',
+  // arguments: '<command>',
   // options: { isDefault: true },
 })
 export class RunCommand extends CommandRunner {
+  constructor(private readonly inquirer: InquirerService) {
+    super();
+  }
   async run(inputs: string[], options: Record<string, any>): Promise<void> {
     // Execute command
-    console.log('%crun.command.ts line:12 inputs', 'color: #007acc;', inputs);
-    exec('ls -la', (error, stdout, stderr) => {
-      if (error) {
-        console.log(`error: ${error.message}`);
-        return;
-      }
-      if (stderr) {
-        console.log(`stderr: ${stderr}`);
-        return;
-      }
-      console.log(stdout);
-    });
+    let query = inputs[0];
+    if (!query) {
+      const values = await this.inquirer.ask<any>(
+        'query-run-questions',
+        undefined,
+      );
+      query = values.query;
+    }
+
+    // Log search result
+    const result = await searchCommands(query);
+    console.log(formatLibraryCommands(result, true));
+
+    // Ask for command
+    const command = (
+      await this.inquirer.ask<{ command: number }>(
+        'exec-run-questions',
+        undefined,
+      )
+    ).command;
+
+    // Extract chosen command
+    const execCommand = result[command].command;
+
+    // Log command and info
+    console.log(execCommand.toString());
+    console.log(
+      'Command is copied to your clipboard, if available. Paste it in your terminal.',
+    );
+
+    // Pipe command to clipboard if available
+    try {
+      clipboard.stdin.write(execCommand);
+      clipboard.stdin.end();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
+
+@QuestionSet({ name: 'query-run-questions' })
+export class QueryRunQuestions {
+  @Question({
+    message: 'Search for commands.',
+    name: 'query',
+  })
+  parseQuery(value: string) {
+    return value;
+  }
+}
+
+@QuestionSet({ name: 'exec-run-questions' })
+export class ExecRunQuestions {
+  @Question({
+    message: 'Which command do you want to run?',
+    name: 'command',
+  })
+  parseCommand(value: string) {
+    return value;
   }
 }
