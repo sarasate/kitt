@@ -11,6 +11,7 @@ import * as childProcess from 'child_process';
 
 @Command({
   name: 'run',
+  description: 'Search for a command and c&p to run it.',
   // arguments: '<command>',
   // options: { isDefault: true },
 })
