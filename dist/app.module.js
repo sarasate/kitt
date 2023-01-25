@@ -42,6 +42,7 @@ AppModule = __decorate([
             remove_command_1.RemoveQuestions,
             search_command_1.SearchQuestions,
             github_token_command_1.TokenQuestions,
+            run_command_1.VariableRunQuestions,
         ],
     })
 ], AppModule);

@@ -10,3 +10,6 @@ export declare class QueryRunQuestions {
 export declare class ExecRunQuestions {
     parseCommand(value: string): string;
 }
+export declare class VariableRunQuestions {
+    parseInput(value: string): string;
+}
