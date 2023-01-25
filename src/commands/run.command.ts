@@ -1,4 +1,3 @@
-import { exec } from 'child_process';
 import {
   Command,
   CommandRunner,
@@ -9,8 +8,6 @@ import {
 import { formatLibraryCommands } from '../utils/commands.format';
 import { searchCommands } from '../utils/commands.search';
 import * as childProcess from 'child_process';
-
-const clipboard = childProcess.spawn('pbcopy');
 
 @Command({
   name: 'run',
@@ -34,7 +31,7 @@ export class RunCommand extends CommandRunner {
 
     // Log search result
     const result = await searchCommands(query);
-    console.log(formatLibraryCommands(result, true));
+    console.log(formatLibraryCommands(result));
 
     // Ask for command
     const commandIndex = (
@@ -55,6 +52,8 @@ export class RunCommand extends CommandRunner {
 
     // Pipe command to clipboard if available
     try {
+      // NOTE: Always spawn (end) a childProcess within a command function.
+      const clipboard = childProcess.spawn('pbcopy');
       clipboard.stdin.write(execCommand);
       clipboard.stdin.end();
     } catch (error) {
