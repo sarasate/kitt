@@ -13,7 +13,7 @@ const file_parse_1 = require("../utils/file.parse");
 let ListCommand = class ListCommand extends nest_commander_1.CommandRunner {
     async run(inputs, options) {
         const json = (0, file_parse_1.parseFile)();
-        (0, commands_format_1.formatCommands)(json);
+        console.log((0, commands_format_1.formatCommands)(json));
     }
 };
 ListCommand = __decorate([

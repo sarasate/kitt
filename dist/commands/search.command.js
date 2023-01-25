@@ -11,8 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SearchQuestions = exports.SearchCommand = void 0;
 const nest_commander_1 = require("nest-commander");
-const axios_1 = require("axios");
 const commands_format_1 = require("../utils/commands.format");
+const commands_search_1 = require("../utils/commands.search");
 const COMMAND_REPO_URL = 'https://api.github.com/repos/sarasate/commands/contents/index.json';
 let SearchCommand = class SearchCommand extends nest_commander_1.CommandRunner {
     constructor(inquirer) {
@@ -23,23 +23,10 @@ let SearchCommand = class SearchCommand extends nest_commander_1.CommandRunner {
         let query = inputs[0];
         if (!query) {
             const values = await this.inquirer.ask('search-questions', undefined);
-            query = values.command;
+            query = values.query;
         }
-        axios_1.default
-            .get(COMMAND_REPO_URL)
-            .then((res) => {
-            if (!res)
-                return;
-            const jsonString = Buffer.from(res.data.content, 'base64').toString('utf-8');
-            const json = JSON.parse(jsonString);
-            const result = json.filter((object) => Object.values(object).some((value) => value
-                .toString()
-                .toLowerCase()
-                .match(new RegExp(query.toLowerCase(), 'i'))));
-            (0, commands_format_1.formatLibraryCommands)(result);
-        })
-            .catch((err) => {
-            console.log(err);
+        (0, commands_search_1.searchCommands)(query).then((output) => {
+            console.log((0, commands_format_1.formatLibraryCommands)(output));
         });
     }
 };

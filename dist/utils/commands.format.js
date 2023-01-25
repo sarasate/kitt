@@ -5,12 +5,12 @@ const table_1 = require("table");
 const chalk = require('chalk');
 const formatCommands = (commands) => {
     const tableData = convertData(commands);
-    console.log((0, table_1.table)(tableData, tableConfig));
+    return (0, table_1.table)(tableData, tableConfig);
 };
 exports.formatCommands = formatCommands;
-const formatLibraryCommands = (commands) => {
+const formatLibraryCommands = (commands, numbered = false) => {
     const tableData = convertLibraryData(commands);
-    console.log((0, table_1.table)(tableData, tableConfig));
+    return (0, table_1.table)(tableData, tableConfig);
 };
 exports.formatLibraryCommands = formatLibraryCommands;
 const convertData = (json) => {
@@ -27,16 +27,16 @@ const convertData = (json) => {
     return arr;
 };
 const convertLibraryData = (json) => {
-    console.log(typeof json);
     const arr = [];
-    arr.push([chalk.bold.blue('Commands'), '', '']);
+    arr.push([chalk.bold.blue('Commands'), '', '', '']);
     arr.push([
+        chalk.bold('No.'),
         chalk.bold('Command'),
         chalk.bold('Description'),
         chalk.bold('Tags'),
     ]);
-    json.forEach((entry) => {
-        arr.push([chalk.green(entry.command), entry.desc, entry.tags]);
+    json.forEach((entry, index) => {
+        arr.push([index + 1, chalk.green(entry.command), entry.desc, entry.tags]);
     });
     return arr;
 };
