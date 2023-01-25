@@ -48,7 +48,6 @@ const convertData = (json: any) => {
  * @returns
  */
 const convertLibraryData = (json: any) => {
-  console.log(typeof json);
   const arr = [];
   arr.push([chalk.bold.blue('Commands'), '', '', '']);
 
@@ -59,8 +58,7 @@ const convertLibraryData = (json: any) => {
     chalk.bold('Tags'),
   ]);
   json.forEach((entry: any, index) => {
-    console.log(index);
-    arr.push([index, chalk.green(entry.command), entry.desc, entry.tags]);
+    arr.push([index + 1, chalk.green(entry.command), entry.desc, entry.tags]);
   });
   return arr;
 };

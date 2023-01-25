@@ -37,7 +37,7 @@ export class RunCommand extends CommandRunner {
     console.log(formatLibraryCommands(result, true));
 
     // Ask for command
-    const command = (
+    const commandIndex = (
       await this.inquirer.ask<{ command: number }>(
         'exec-run-questions',
         undefined,
@@ -45,7 +45,7 @@ export class RunCommand extends CommandRunner {
     ).command;
 
     // Extract chosen command
-    const execCommand = result[command].command;
+    const execCommand = result[commandIndex - 1].command;
 
     // Log command and info
     console.log(execCommand.toString());
@@ -66,7 +66,7 @@ export class RunCommand extends CommandRunner {
 @QuestionSet({ name: 'query-run-questions' })
 export class QueryRunQuestions {
   @Question({
-    message: 'Search for commands.',
+    message: 'Search for commands:',
     name: 'query',
   })
   parseQuery(value: string) {
