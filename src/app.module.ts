@@ -14,6 +14,7 @@ import {
   ExecRunQuestions,
   QueryRunQuestions,
   RunCommand,
+  VariableRunQuestions,
 } from './commands/run.command';
 import { SearchCommand, SearchQuestions } from './commands/search.command';
 import { VersionCommand } from './commands/version.command';
@@ -38,6 +39,7 @@ import { VersionCommand } from './commands/version.command';
     RemoveQuestions,
     SearchQuestions,
     TokenQuestions,
+    VariableRunQuestions,
   ],
 })
 export class AppModule {}

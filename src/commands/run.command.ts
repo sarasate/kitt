@@ -43,7 +43,25 @@ export class RunCommand extends CommandRunner {
     ).command;
 
     // Extract chosen command
-    const execCommand = result[commandIndex - 1].command;
+    let execCommand = result[commandIndex - 1].command;
+
+    // Parse command variables
+    const regex = /\[(.*?)\]/gm;
+
+    const variables = execCommand.match(regex);
+
+    // Ask for variable values (async iteration)
+    for await (const variable of variables) {
+      // Ask for variable value
+      const result = await this.inquirer.ask<{ input: string }>(
+        'variable-run-questions',
+        undefined,
+      );
+      const input = result.input;
+      console.log(input);
+      // Replace variable with value
+      execCommand = execCommand.replace(variable, input);
+    }
 
     // Log command and info
     console.log(execCommand.toString());
@@ -81,6 +99,16 @@ export class ExecRunQuestions {
     name: 'command',
   })
   parseCommand(value: string) {
+    return value;
+  }
+}
+@QuestionSet({ name: 'variable-run-questions' })
+export class VariableRunQuestions {
+  @Question({
+    message: 'Enter value for variable:',
+    name: 'input',
+  })
+  parseInput(value: string) {
     return value;
   }
 }
