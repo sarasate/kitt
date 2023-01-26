@@ -50,17 +50,20 @@ export class RunCommand extends CommandRunner {
 
     const variables = execCommand.match(regex);
 
-    // Ask for variable values (async iteration)
-    for await (const variable of variables) {
-      // Ask for variable value
-      const result = await this.inquirer.ask<{ input: string }>(
-        'variable-run-questions',
-        undefined,
-      );
-      const input = result.input;
-      console.log(input);
-      // Replace variable with value
-      execCommand = execCommand.replace(variable, input);
+    // Check if command has variables and ask for values
+    if (variables) {
+      // Ask for variable values (async iteration)
+      for await (const variable of variables) {
+        // Ask for variable value
+        const result = await this.inquirer.ask<{ input: string }>(
+          'variable-run-questions',
+          undefined,
+        );
+        const input = result.input;
+        console.log(input);
+        // Replace variable with value
+        execCommand = execCommand.replace(variable, input);
+      }
     }
 
     // Log command and info
