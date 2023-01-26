@@ -4,6 +4,7 @@ import {
   InquirerService,
   Question,
   QuestionSet,
+  ValidateFor,
 } from 'nest-commander';
 import { formatLibraryCommands } from '../utils/commands.format';
 import { searchCommands } from '../utils/commands.search';
@@ -101,8 +102,16 @@ export class ExecRunQuestions {
     message: 'Which command do you want to run?',
     name: 'command',
   })
-  parseCommand(value: string) {
+  parseCommand(value: number) {
     return value;
+  }
+
+  @ValidateFor({ name: 'command' })
+  validateNumber(value: number) {
+    if (!isNaN(Number(value))) {
+      return true;
+    }
+    return 'Please provide a number.';
   }
 }
 @QuestionSet({ name: 'variable-run-questions' })
@@ -110,6 +119,7 @@ export class VariableRunQuestions {
   @Question({
     message: 'Enter value for variable:',
     name: 'input',
+    type: 'input',
   })
   parseInput(value: string) {
     return value;
