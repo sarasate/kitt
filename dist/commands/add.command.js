@@ -34,7 +34,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], CommandQuestions.prototype, "parseCommand", null);
 __decorate([
-    (0, nest_commander_1.Question)({ message: "What's the description?", name: 'description' }),
+    (0, nest_commander_1.Question)({ message: "What's the description?", name: 'desc' }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
@@ -57,9 +57,9 @@ let AddCommand = class AddCommand extends nest_commander_1.CommandRunner {
     async run(inputs, options) {
         let values = {};
         values = await this.inquirer.ask('add-questions', undefined);
-        const { command, description, alias } = values;
+        const { command, desc, alias } = values;
         const json = (0, file_parse_1.parseFile)();
-        Object.assign(json, { [command]: { description, alias } });
+        json.push({ command, desc, alias });
         (0, files_persist_1.writeFile)(json);
     }
 };

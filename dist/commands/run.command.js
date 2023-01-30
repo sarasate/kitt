@@ -39,28 +39,30 @@ let RunCommand = class RunCommand extends nest_commander_1.CommandRunner {
         let execCommand = result[commandIndex - 1].command;
         const regex = /\[(.*?)\]/gm;
         const variables = execCommand.match(regex);
-        try {
-            for (var _d = true, variables_1 = __asyncValues(variables), variables_1_1; variables_1_1 = await variables_1.next(), _a = variables_1_1.done, !_a;) {
-                _c = variables_1_1.value;
-                _d = false;
-                try {
-                    const variable = _c;
-                    const result = await this.inquirer.ask('variable-run-questions', undefined);
-                    const input = result.input;
-                    console.log(input);
-                    execCommand = execCommand.replace(variable, input);
-                }
-                finally {
-                    _d = true;
-                }
-            }
-        }
-        catch (e_1_1) { e_1 = { error: e_1_1 }; }
-        finally {
+        if (variables) {
             try {
-                if (!_d && !_a && (_b = variables_1.return)) await _b.call(variables_1);
+                for (var _d = true, variables_1 = __asyncValues(variables), variables_1_1; variables_1_1 = await variables_1.next(), _a = variables_1_1.done, !_a;) {
+                    _c = variables_1_1.value;
+                    _d = false;
+                    try {
+                        const variable = _c;
+                        const result = await this.inquirer.ask('variable-run-questions', undefined);
+                        const input = result.input;
+                        console.log(input);
+                        execCommand = execCommand.replace(variable, input);
+                    }
+                    finally {
+                        _d = true;
+                    }
+                }
             }
-            finally { if (e_1) throw e_1.error; }
+            catch (e_1_1) { e_1 = { error: e_1_1 }; }
+            finally {
+                try {
+                    if (!_d && !_a && (_b = variables_1.return)) await _b.call(variables_1);
+                }
+                finally { if (e_1) throw e_1.error; }
+            }
         }
         console.log(execCommand.toString());
         console.log('Command is copied to your clipboard, if available. Paste it in your terminal.');
@@ -104,6 +106,12 @@ let ExecRunQuestions = class ExecRunQuestions {
     parseCommand(value) {
         return value;
     }
+    validateNumber(value) {
+        if (!isNaN(Number(value))) {
+            return true;
+        }
+        return 'Please provide a number.';
+    }
 };
 __decorate([
     (0, nest_commander_1.Question)({
@@ -111,9 +119,15 @@ __decorate([
         name: 'command',
     }),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], ExecRunQuestions.prototype, "parseCommand", null);
+__decorate([
+    (0, nest_commander_1.ValidateFor)({ name: 'command' }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", void 0)
+], ExecRunQuestions.prototype, "validateNumber", null);
 ExecRunQuestions = __decorate([
     (0, nest_commander_1.QuestionSet)({ name: 'exec-run-questions' })
 ], ExecRunQuestions);
@@ -127,6 +141,7 @@ __decorate([
     (0, nest_commander_1.Question)({
         message: 'Enter value for variable:',
         name: 'input',
+        type: 'input',
     }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
