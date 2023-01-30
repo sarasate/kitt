@@ -27,7 +27,7 @@ export class CommandQuestions {
     return value;
   }
 
-  @Question({ message: "What's the description?", name: 'description' })
+  @Question({ message: "What's the description?", name: 'desc' })
   parseDesc(value: string) {
     return value;
   }
@@ -46,7 +46,7 @@ export class AddCommand extends CommandRunner {
   async run(inputs: string[], options: Record<string, any>): Promise<void> {
     let values = {} as any; //
     values = await this.inquirer.ask<CommandInput>('add-questions', undefined);
-    const { command, description, alias } = values;
+    const { command, desc, alias } = values;
 
     // TODO validate command
 
@@ -55,7 +55,9 @@ export class AddCommand extends CommandRunner {
     // Save command in config file
     const json = parseFile();
 
-    Object.assign(json, { [command]: { description, alias } });
+    json.push({ command, desc, alias });
+
+    // Object.assign(json, { []: {command, description, alias } });
 
     writeFile(json);
   }

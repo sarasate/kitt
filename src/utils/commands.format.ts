@@ -16,8 +16,9 @@ export const formatCommands = (commands: { [key: string]: CommandOutput }) => {
   return table(tableData, tableConfig);
 };
 
+/** @deprecated */
 export const formatLibraryCommands = (commands, numbered = false) => {
-  const tableData = convertLibraryData(commands);
+  const tableData = convertData(commands);
   return table(tableData, tableConfig);
 };
 
@@ -29,36 +30,23 @@ export const formatLibraryCommands = (commands, numbered = false) => {
  */
 const convertData = (json: any) => {
   const arr = [];
-  arr.push([chalk.bold.blue('Commands'), '', '']);
-  arr.push([
-    chalk.bold('Command'),
-    chalk.bold('Description'),
-    chalk.bold('Alias'),
-  ]);
-  Object.entries(json).forEach(([key, value]: any) => {
-    arr.push([chalk.green(key), value.description, value.alias]);
-  });
-  return arr;
-};
-
-/**
- * Convert commands json to array for table output
- *
- * @param json
- * @returns
- */
-const convertLibraryData = (json: any) => {
-  const arr = [];
-  arr.push([chalk.bold.blue('Commands'), '', '', '']);
+  arr.push([chalk.bold.blue('Commands'), '', '', '', '']);
 
   arr.push([
     chalk.bold('No.'),
     chalk.bold('Command'),
     chalk.bold('Description'),
+    chalk.bold('Alias'),
     chalk.bold('Tags'),
   ]);
   json.forEach((entry: any, index) => {
-    arr.push([index + 1, chalk.green(entry.command), entry.desc, entry.tags]);
+    arr.push([
+      index + 1,
+      chalk.green(entry.command),
+      entry.desc || '-',
+      entry.alias || '-',
+      entry.tags || '-',
+    ]);
   });
   return arr;
 };
