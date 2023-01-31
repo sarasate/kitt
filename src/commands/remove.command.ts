@@ -38,10 +38,15 @@ export class RemoveCommand extends CommandRunner {
     const commands = parseFile();
 
     // Remove command from config file
-    delete commands[command];
+    const filteredCommands = commands.filter(
+      (item) => item.command.trim() !== command.trim(),
+    );
+
+    // TODO Check if command already has been found
 
     // Persist changes
-    writeFile(commands);
+    writeFile(filteredCommands);
+    console.log('Command removed successfully!');
   }
 }
 
