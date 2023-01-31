@@ -11,6 +11,18 @@ Keep it in the Terminal.
 - Delete commands
 - Sync to github gist
 
+# Installation
+
+`npm -g install kitt`
+
+`yarn global add kitt`
+
+`pnpm -g install kitt`
+
+# Usage
+
+kitt [command]
+
 # Roadmap
 
 - Search commands in command library
