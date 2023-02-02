@@ -1,5 +1,6 @@
 {
   "files.exclude": {
     "**/dist": true
-  }
+  },
+  "todo-tree.tree.scanMode": "workspace"
 }

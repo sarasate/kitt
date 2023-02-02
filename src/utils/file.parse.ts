@@ -14,10 +14,10 @@ export const parseFile = (path = 'commands.json') => {
 };
 
 export const parseCredentialsFile = () => {
-  const file = fs.readFileSync(`${BASE_PATH}/.credentials.json`, 'utf8');
-
-  // TODO Error handling
-  if (!file) return {};
-
-  return JSON.parse(file);
+  try {
+    const file = fs.readFileSync(`${BASE_PATH}/.credentials.json`, 'utf8');
+    return JSON.parse(file);
+  } catch (error) {
+    throw new Error('File not found');
+  }
 };
